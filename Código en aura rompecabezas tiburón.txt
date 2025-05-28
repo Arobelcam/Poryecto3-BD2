@@ -1,0 +1,179 @@
+# Creación rompecabezas:
+
+MERGE (r:Rompecabezas {RompecabezasID: "tiburon1"})
+
+--------------------------------------------------------------------
+
+# Creación de piezas
+
+#Pieza 1
+MERGE (r:Rompecabezas {RompecabezasID: "tiburon1"})
+MERGE (p1:Pieza {
+  PiezaID: "ti1",
+  RompecabezasID: "tiburon1",
+  Tipo: "esquina",
+  Estado: true,
+  BordeCompartido: true,
+  NumeroEntradas_Salidas: 4
+})
+MERGE (r)-[:Compuesto_por]->(p1);
+
+# Pieza 2
+MERGE (r:Rompecabezas {RompecabezasID: "tiburon1"})
+MERGE (p2:Pieza {
+  PiezaID: "ti2",
+  RompecabezasID: "tiburon1",
+  Tipo: "exterior",
+  Estado: true,
+  BordeCompartido: true,
+  NumeroEntradas_Salidas: 5
+})
+MERGE (r)-[:Compuesto_por]->(p2);
+
+# Pieza 3
+MERGE (r:Rompecabezas {RompecabezasID: "tiburon1"})
+MERGE (p3:Pieza {
+  PiezaID: "ti3",
+  RompecabezasID: "tiburon1",
+  Tipo: "esquina",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+MERGE (r)-[:Compuesto_por]->(p3);
+
+# Pieza 4
+MERGE (r:Rompecabezas {RompecabezasID: "tiburon1"})
+MERGE (p4:Pieza {
+  PiezaID: "ti4",
+  RompecabezasID: "tiburon1",
+  Tipo: "esquina",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 5
+})
+MERGE (r)-[:Compuesto_por]->(p4);
+-------------------------------------------------------------------------------------
+
+#Creacion de Bordes:
+
+//Pieza 1:
+MATCH (p1:Pieza {PiezaID: "ti1"})
+UNWIND [
+  {BordeID: "p1b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "p1b2", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "p1b3", EntradaOSalida: 1, Compartido: 1},
+  {BordeID: "p1b4", EntradaOSalida: 0, Compartido: 0}
+] AS b1
+MERGE (bd1:Borde {
+  BordeID:        b1.BordeID,
+  PiezaID:        p1.PiezaID,
+  EntradaOSalida: b1.EntradaOSalida,
+  Compartido:     b1.Compartido
+})
+MERGE (p1)-[:Tiene]->(bd1)
+
+
+// Pieza 2: crear Bordes y relacionarlos con la pieza
+MATCH (p2:Pieza {PiezaID: "ti2"})
+UNWIND [
+  {BordeID: "p2b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "p2b2", EntradaOSalida: 0, Compartido: 1},
+  {BordeID: "p2b3", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "p2b4", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "p2b5", EntradaOSalida: 0, Compartido: 0}
+] AS b
+MERGE (bd:Borde {
+  BordeID:        b.BordeID,
+  PiezaID:        p2.PiezaID,
+  EntradaOSalida: b.EntradaOSalida,
+  Compartido:     b.Compartido
+})
+MERGE (p2)-[:Tiene]->(bd)
+;
+
+// Pieza 3: crear Bordes y relacionarlos con la pieza
+MATCH (p2:Pieza {PiezaID: "ti3"})
+UNWIND [
+  {BordeID: "p3b1", EntradaOSalida: 1, Compartido: 0}
+] AS b3
+MERGE (bd3:Borde {
+  BordeID:        b3.BordeID,
+  PiezaID:        p3.PiezaID,
+  EntradaOSalida: b3.EntradaOSalida,
+  Compartido:     b3.Compartido
+})
+MERGE (p3)-[:Tiene]->(bd3)
+;
+
+// Pieza 4: crear Bordes y relacionarlos con la pieza
+MATCH (p4:Pieza {PiezaID: "ti4"})
+UNWIND [
+  {BordeID: "p4b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "p4b2", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "p4b3", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "p4b4", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "p4b5", EntradaOSalida: 0, Compartido: 0}
+] AS b4
+MERGE (bd4:Borde {
+  BordeID:        b4.BordeID,
+  PiezaID:        p4.PiezaID,
+  EntradaOSalida: b4.EntradaOSalida,
+  Compartido:     b4.Compartido
+})
+
+MERGE (p4)-[:Tiene]->(bd4);
+
+------------------------------------------------------------------------------------
+# Conexiones entre piezas con los bordes:
+// 1) Conectar el borde p1b4 con p2b1
+MATCH 
+  (b1:Borde {BordeID: "p1b4"}), 
+  (b2:Borde {BordeID: "p2b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 2) Conectar el borde p2b5 con p3b1
+MATCH 
+  (b1:Borde {BordeID: "p2b5"}), 
+  (b2:Borde {BordeID: "p3b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 3) Conectar el borde p1b1 con p4b1
+MATCH 
+  (b1:Borde {BordeID: "p1b1"}), 
+  (b2:Borde {BordeID: "p4b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 4) Conectar el borde p1b2 con p4b2
+MATCH 
+  (b1:Borde {BordeID: "p1b2"}), 
+  (b2:Borde {BordeID: "p4b2"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 5) Conectar el borde p4b3 con p1b3
+MATCH 
+  (b1:Borde {BordeID: "p4b3"}), 
+  (b2:Borde {BordeID: "p1b3"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 6) Conectar el borde p4b3 con p2b2
+MATCH 
+  (b1:Borde {BordeID: "p4b3"}), 
+  (b2:Borde {BordeID: "p2b2"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 7) Conectar el borde p2b3 con p4b4
+MATCH 
+  (b1:Borde {BordeID: "p2b3"}), 
+  (b2:Borde {BordeID: "p4b4"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 8) Conectar el borde p4b5 con p2b4
+MATCH 
+  (b1:Borde {BordeID: "p4b5"}), 
+  (b2:Borde {BordeID: "p2b4"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
