@@ -40,22 +40,38 @@ def obtener_bordes_salida_validos(pieza_id):
 
 def obtener_conexion_de_borde(borde_id):
     """
-    Dado un borde de salida, devuelve el borde de entrada al que se conecta y la pieza a la que pertenece.
+    Dado un borde (ya sea de salida o entrada), encuentra todos los bordes conectados
+    sin importar la dirección de la relación Conecta_en. Devuelve también la pieza conectada.
     """
     query = """
-    MATCH (b1:Borde {BordeID: $borde_id})-[:Conecta_en]->(b2:Borde)<-[:Tiene]-(p:Pieza)
+    MATCH (b1:Borde {BordeID: $borde_id})-[:Conecta_en]-(b2:Borde)<-[:Tiene]-(p:Pieza)
     RETURN b2.BordeID AS borde_entrada, p.PiezaID AS pieza_destino
     """
     with driver.session(database="neo4j") as session:
         result = session.run(query, borde_id=borde_id)
         return [{"borde_entrada": r["borde_entrada"], "pieza_destino": r["pieza_destino"]} for r in result]
 
+def obtener_bordes_validos(pieza_id):
+    """
+    Devuelve todos los bordes (entrada o salida) de una pieza que no sean compartidos.
+    """
+    query = """
+    MATCH (p:Pieza {PiezaID: $pieza_id})-[:Tiene]->(b:Borde)
+    WHERE b.Compartido = 0
+    RETURN b.BordeID AS id
+    """
+    with driver.session(database="neo4j") as session:
+        result = session.run(query, pieza_id=pieza_id)
+        return [r["id"] for r in result]
+
 def resolver_rompecabezas(pieza_inicial):
     """
-    Algoritmo DFS para recorrer las piezas conectadas, evitando ciclos y bordes compartidos.
+    Algoritmo DFS para recorrer piezas conectadas por bordes no compartidos, usando relaciones Conecta_en
+    en ambas direcciones. Evita ciclos y pasos duplicados.
     """
     piezas_colocadas = set()
     instrucciones = []
+    conexiones_usadas = set()
     pila = [pieza_inicial]
 
     while pila:
@@ -64,23 +80,33 @@ def resolver_rompecabezas(pieza_inicial):
             continue
         piezas_colocadas.add(pieza_actual)
 
-        bordes = obtener_bordes_salida_validos(pieza_actual)
+        # Obtener todos los bordes válidos (entrada o salida, pero no compartidos)
+        bordes = obtener_bordes_validos(pieza_actual)
 
-        for borde_salida in bordes:
-            conexiones = obtener_conexion_de_borde(borde_salida)
+        for borde in bordes:
+            conexiones = obtener_conexion_de_borde(borde)
 
             for conexion in conexiones:
                 pieza_destino = conexion["pieza_destino"]
-                borde_entrada = conexion["borde_entrada"]
+                borde_conectado = conexion["borde_entrada"]
+
+                # Evitar instrucciones duplicadas (conexiones ya consideradas en otra dirección)
+                clave_conexion = tuple(sorted([borde, borde_conectado]))
+                if clave_conexion in conexiones_usadas:
+                    continue
+
+                conexiones_usadas.add(clave_conexion)
+
+                instrucciones.append(
+                    f"Conectar borde {borde} de pieza {pieza_actual} "
+                    f"con borde {borde_conectado} de pieza {pieza_destino}"
+                )
 
                 if pieza_destino not in piezas_colocadas:
-                    instrucciones.append(
-                        f"Conectar borde {borde_salida} de pieza {pieza_actual} "
-                        f"con borde {borde_entrada} de pieza {pieza_destino}"
-                    )
                     pila.append(pieza_destino)
 
     return instrucciones
+
 
 # ---------- EJECUCIÓN PRINCIPAL ----------
 if __name__ == "__main__":
