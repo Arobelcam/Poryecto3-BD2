@@ -702,6 +702,16 @@ MATCH
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
+  (b1:Borde {BordeID: "cp8b1"}), 
+  (b2:Borde {BordeID: "cp9b2"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+MATCH 
+  (b1:Borde {BordeID: "cp8b1"}), 
+  (b2:Borde {BordeID: "cp9b2"})
+MERGE (b2)-[:Conecta_en]->(b3);
+
+MATCH 
   (b1:Borde {BordeID: "cp9b2"}), 
   (b2:Borde {BordeID: "cp10b1"})
 MERGE (b2)-[:Conecta_en]->(b1);

@@ -1,7 +1,7 @@
 from neo4j import GraphDatabase
 
 # Configuración de conexión
-URI = "neo4j+s://551c5c73.databases.neo4j.io"
+URI = "neo4j+ssc://551c5c73.databases.neo4j.io"
 USERNAME = "neo4j"
 PASSWORD = "Zltdp3raSar5tXbF8TjmGr15Jv3onamt6uO5TjR_oXU"
 
@@ -110,8 +110,8 @@ def resolver_rompecabezas(pieza_inicial):
 
 # ---------- EJECUCIÓN PRINCIPAL ----------
 if __name__ == "__main__":
-    rompecabezas_id = "tiburon1"   # <- Cambia este ID si es diferente en tu base
-    pieza_inicial = "ti2"    # <- Cambia esta pieza por la inicial deseada
+    rompecabezas_id = "caracol1"   # <- Cambia este ID si es diferente en tu base
+    pieza_inicial = "ca2"    # <- Cambia esta pieza por la inicial deseada
 
     print(" Piezas válidas en el rompecabezas:")
     piezas_validas = obtener_piezas_validas(rompecabezas_id)
