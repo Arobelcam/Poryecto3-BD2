@@ -110,8 +110,8 @@ def resolver_rompecabezas(pieza_inicial):
 
 # ---------- EJECUCIÓN PRINCIPAL ----------
 if __name__ == "__main__":
-    rompecabezas_id = "caracol1"   # <- Cambia este ID si es diferente en tu base
-    pieza_inicial = "ca2"    # <- Cambia esta pieza por la inicial deseada
+    rompecabezas_id = "caracol1"   #el ID del rompecabezas a resolver
+    pieza_inicial = "ca2"    #pieza inicial para comenzar a resolver el rompecabezas
 
     print(" Piezas válidas en el rompecabezas:")
     piezas_validas = obtener_piezas_validas(rompecabezas_id)

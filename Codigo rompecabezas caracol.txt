@@ -702,19 +702,34 @@ MATCH
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp8b1"}), 
-  (b2:Borde {BordeID: "cp9b2"})
+  (b1:Borde {BordeID: "cp8b2"}), 
+  (b2:Borde {BordeID: "cp9b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp8b1"}), 
-  (b2:Borde {BordeID: "cp9b2"})
-MERGE (b2)-[:Conecta_en]->(b3);
+  (b1:Borde {BordeID: "cp8b2"}), 
+  (b2:Borde {BordeID: "cp9b1"})
+MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
   (b1:Borde {BordeID: "cp9b2"}), 
   (b2:Borde {BordeID: "cp10b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
+
+MATCH 
+  (b1:Borde {BordeID: "cp9b2"}), 
+  (b2:Borde {BordeID: "cp10b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+MATCH 
+  (b1:Borde {BordeID: "cp10b2"}), 
+  (b2:Borde {BordeID: "cp11b1"})
+MERGE (b2)-[:Conecta_en]->(b1);
+
+MATCH 
+  (b1:Borde {BordeID: "cp10b2"}), 
+  (b2:Borde {BordeID: "cp11b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
   (b1:Borde {BordeID: "cp11b2"}), 
