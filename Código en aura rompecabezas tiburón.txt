@@ -177,3 +177,53 @@ MATCH
   (b2:Borde {BordeID: "p2b4"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
+// 9) Conectar el borde p2b1 con p1b4
+MATCH 
+  (b1:Borde {BordeID: "p2b1"}), 
+  (b2:Borde {BordeID: "p1b4"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 10) Conectar el borde p3b1 con p2b5
+MATCH 
+  (b1:Borde {BordeID: "p3b1"}), 
+  (b2:Borde {BordeID: "p2b5"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 11) Conectar el borde p4b1 con p1b1
+MATCH 
+  (b1:Borde {BordeID: "p4b1"}), 
+  (b2:Borde {BordeID: "p1b1"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 12) Conectar el borde p4b2 con p1b2
+MATCH 
+  (b1:Borde {BordeID: "p4b2"}), 
+  (b2:Borde {BordeID: "p1b2"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 13) Conectar el borde p4b3 con p1b3
+MATCH 
+  (b1:Borde {BordeID: "p4b3"}), 
+  (b2:Borde {BordeID: "p1b3"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 14) Conectar el borde p2b2 con p4b3
+MATCH 
+  (b1:Borde {BordeID: "p2b2"}), 
+  (b2:Borde {BordeID: "p4b3"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+
+// 15) Conectar el borde p4b4 con p2b3
+MATCH 
+  (b1:Borde {BordeID: "p4b4"}), 
+  (b2:Borde {BordeID: "p2b3"})
+MERGE (b1)-[:Conecta_en]->(b2);
+
+// 16) Conectar el borde p4b5 con p2b4
+MATCH 
+  (b1:Borde {BordeID: "p2b4"}), 
+  (b2:Borde {BordeID: "p4b5"})
+MERGE (b1)-[:Conecta_en]->(b2)
