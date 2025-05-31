@@ -118,8 +118,8 @@ def resolver_rompecabezas(rompecabezas_id, pieza_inicial=None):
 
 # ───────── Ejecución principal ─────────
 if __name__ == "__main__":
-    rompecabezas_id = "caracol1"
-    pieza_inicial   = "ca7"           # se salta si está perdida
+    rompecabezas_id = "caracol2"
+    pieza_inicial   = "c5"           # se salta si está perdida
 
     print("\nPiezas válidas en el rompecabezas:")
     for p in obtener_piezas_validas(rompecabezas_id):

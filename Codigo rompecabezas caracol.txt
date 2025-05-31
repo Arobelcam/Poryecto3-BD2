@@ -301,9 +301,9 @@ MERGE (r)-[:Compuesto_por]->(26);
 
 #Creacion de Bordes:
 
-MATCH (p1:Pieza {PiezaID: "ca1"})
+MATCH (p1:Pieza {PiezaID: "c1"})
 UNWIND [
-  {BordeID: "cp1b1", EntradaOSalida: 0, Compartido: 0}] AS b1
+  {BordeID: "cap1b1", EntradaOSalida: 0, Compartido: 0}] AS b1
 MERGE (bd1:Borde {
   BordeID:        b1.BordeID,
   PiezaID:        p1.PiezaID,
@@ -312,10 +312,11 @@ MERGE (bd1:Borde {
 })
 MERGE (p1)-[:Tiene]->(bd1);
 
-MATCH (p2:Pieza {PiezaID: "ca2"})
+MATCH (p2:Pieza {PiezaID: "c2"})
 UNWIND [
-  {BordeID: "cp2b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp2b2", EntradaOSalida: 0, Compartido: 0}] AS b2
+  {BordeID: "cap2b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "cap2b2", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "cap2b3", EntradaOSalida: 0, Compartido: 0}] AS b2
 MERGE (bd2:Borde {
   BordeID:        b2.BordeID,
   PiezaID:        p2.PiezaID,
@@ -325,10 +326,10 @@ MERGE (bd2:Borde {
 MERGE (p2)-[:Tiene]->(bd2);
 
 
-MATCH (p3:Pieza {PiezaID: "ca3"})
+MATCH (p3:Pieza {PiezaID: "c3"})
 UNWIND [
-  {BordeID: "cp3b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp3b2", EntradaOSalida: 0, Compartido: 0}] AS b3
+  {BordeID: "cap3b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "cap3b2", EntradaOSalida: 0, Compartido: 0}] AS b3
 MERGE (bd3:Borde {
   BordeID:        b3.BordeID,
   PiezaID:        p3.PiezaID,
@@ -337,10 +338,10 @@ MERGE (bd3:Borde {
 })
 MERGE (p3)-[:Tiene]->(bd3);
 
-MATCH (p4:Pieza {PiezaID: "ca4"})
+MATCH (p4:Pieza {PiezaID: "c4"})
 UNWIND [
-  {BordeID: "cp4b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp4b2", EntradaOSalida: 0, Compartido: 0}] AS b4
+  {BordeID: "cap4b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "cap4b2", EntradaOSalida: 1, Compartido: 0}] AS b4
 MERGE (bd4:Borde {
   BordeID:        b4.BordeID,
   PiezaID:        p4.PiezaID,
@@ -349,10 +350,10 @@ MERGE (bd4:Borde {
 })
 MERGE (p4)-[:Tiene]->(bd4);
 
-MATCH (p5:Pieza {PiezaID: "ca5"})
+MATCH (p5:Pieza {PiezaID: "c5"})
 UNWIND [
-  {BordeID: "cp5b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp5b2", EntradaOSalida: 0, Compartido: 0}] AS b5
+  {BordeID: "cap5b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "cap5b2", EntradaOSalida: 1, Compartido: 0}] AS b5
 MERGE (bd5:Borde {
   BordeID:        b5.BordeID,
   PiezaID:        p5.PiezaID,
@@ -362,10 +363,10 @@ MERGE (bd5:Borde {
 MERGE (p5)-[:Tiene]->(bd5);
 
 
-MATCH (p6:Pieza {PiezaID: "ca6"})
+MATCH (p6:Pieza {PiezaID: "c6"})
 UNWIND [
-  {BordeID: "cp6b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp6b2", EntradaOSalida: 0, Compartido: 0}] AS b6
+  {BordeID: "cap6b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "cap6b2", EntradaOSalida: 1, Compartido: 0}] AS b6
 MERGE (bd6:Borde {
   BordeID:        b6.BordeID,
   PiezaID:        p6.PiezaID,
@@ -374,10 +375,10 @@ MERGE (bd6:Borde {
 })
 MERGE (p6)-[:Tiene]->(bd6);
 
-MATCH (p7:Pieza {PiezaID: "ca7"})
+MATCH (p7:Pieza {PiezaID: "c7"})
 UNWIND [
-  {BordeID: "cp7b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp7b2", EntradaOSalida: 0, Compartido: 0}] AS b7
+  {BordeID: "cap7b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "cap7b2", EntradaOSalida: 1, Compartido: 0}] AS b7
 MERGE (bd7:Borde {
   BordeID:        b7.BordeID,
   PiezaID:        p7.PiezaID,
@@ -386,10 +387,11 @@ MERGE (bd7:Borde {
 })
 MERGE (p7)-[:Tiene]->(bd7);
 
-MATCH (p8:Pieza {PiezaID: "ca8"})
+MATCH (p8:Pieza {PiezaID: "c8"})
 UNWIND [
-  {BordeID: "cp8b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp8b2", EntradaOSalida: 0, Compartido: 0}] AS b8
+  {BordeID: "cap8b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "cap8b2", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "cap8b3", EntradaOSalida: 0, Compartido: 0}] AS b8
 MERGE (bd8:Borde {
   BordeID:        b8.BordeID,
   PiezaID:        p8.PiezaID,
@@ -398,10 +400,10 @@ MERGE (bd8:Borde {
 })
 MERGE (p8)-[:Tiene]->(bd8);
 
-MATCH (p9:Pieza {PiezaID: "ca9"})
+MATCH (p9:Pieza {PiezaID: "c9"})
 UNWIND [
-  {BordeID: "cp9b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp9b2", EntradaOSalida: 0, Compartido: 0}] AS b9
+  {BordeID: "cap9b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "cap9b2", EntradaOSalida: 0, Compartido: 0}] AS b9
 MERGE (bd9:Borde {
   BordeID:        b9.BordeID,
   PiezaID:        p9.PiezaID,
@@ -410,10 +412,9 @@ MERGE (bd9:Borde {
 })
 MERGE (p9)-[:Tiene]->(bd9);
 
-MATCH (p10:Pieza {PiezaID: "ca10"})
+MATCH (p10:Pieza {PiezaID: "c10"})
 UNWIND [
-  {BordeID: "cp10b1", EntradaOSalida: 1, Compartido: 0},
-  {BordeID: "cp10b2", EntradaOSalida: 0, Compartido: 0}] AS b10
+  {BordeID: "cap10b1", EntradaOSalida: 1, Compartido: 0}] AS b10
 MERGE (bd10:Borde {
   BordeID:        b10.BordeID,
   PiezaID:        p10.PiezaID,
@@ -632,113 +633,113 @@ MERGE (p26)-[:Tiene]->(bd26)
 # Conectar bordes
 
 MATCH 
-  (b1:Borde {BordeID: "cp1b1"}), 
-  (b2:Borde {BordeID: "cp2b1"})
+  (b1:Borde {BordeID: "dp1b1"}), 
+  (b2:Borde {BordeID: "dp2b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp1b1"}), 
-  (b2:Borde {BordeID: "cp2b1"})
+  (b1:Borde {BordeID: "dp1b1"}), 
+  (b2:Borde {BordeID: "dp2b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp2b2"}), 
-  (b2:Borde {BordeID: "cp3b1"})
+  (b1:Borde {BordeID: "dp2b2"}), 
+  (b2:Borde {BordeID: "dp3b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp2b2"}), 
-  (b2:Borde {BordeID: "cp3b1"})
+  (b1:Borde {BordeID: "dp2b2"}), 
+  (b2:Borde {BordeID: "dp3b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp3b2"}), 
-  (b2:Borde {BordeID: "cp4b1"})
+  (b1:Borde {BordeID: "dp2b3"}), 
+  (b2:Borde {BordeID: "dp5b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp3b2"}), 
-  (b2:Borde {BordeID: "cp4b1"})
+  (b1:Borde {BordeID: "dp2b3"}), 
+  (b2:Borde {BordeID: "dp5b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp4b2"}), 
-  (b2:Borde {BordeID: "cp5b1"})
+  (b1:Borde {BordeID: "dp2b4"}), 
+  (b2:Borde {BordeID: "dp4b2"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp4b2"}), 
-  (b2:Borde {BordeID: "cp5b1"})
+  (b1:Borde {BordeID: "dp2b4"}), 
+  (b2:Borde {BordeID: "dp4b2"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp5b2"}), 
-  (b2:Borde {BordeID: "cp6b1"})
+  (b1:Borde {BordeID: "dp4b1"}), 
+  (b2:Borde {BordeID: "dp5b2"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp5b2"}), 
-  (b2:Borde {BordeID: "cp6b1"})
+  (b1:Borde {BordeID: "dp4b1"}), 
+  (b2:Borde {BordeID: "dp5b2"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp6b2"}), 
-  (b2:Borde {BordeID: "cp7b1"})
+  (b1:Borde {BordeID: "dp4b3"}), 
+  (b2:Borde {BordeID: "dp7b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp6b2"}), 
-  (b2:Borde {BordeID: "cp7b1"})
+  (b1:Borde {BordeID: "dp4b3"}), 
+  (b2:Borde {BordeID: "dp7b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp7b2"}), 
-  (b2:Borde {BordeID: "cp8b1"})
+  (b1:Borde {BordeID: "dp5b3"}), 
+  (b2:Borde {BordeID: "dp8b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp7b2"}), 
-  (b2:Borde {BordeID: "cp8b1"})
+  (b1:Borde {BordeID: "dp5b3"}), 
+  (b2:Borde {BordeID: "dp8b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp8b2"}), 
-  (b2:Borde {BordeID: "cp9b1"})
+  (b1:Borde {BordeID: "dp5b4"}), 
+  (b2:Borde {BordeID: "dp6b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp8b2"}), 
-  (b2:Borde {BordeID: "cp9b1"})
+  (b1:Borde {BordeID: "dp5b4"}), 
+  (b2:Borde {BordeID: "dp6b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp9b2"}), 
-  (b2:Borde {BordeID: "cp10b1"})
+  (b1:Borde {BordeID: "dp7b2"}), 
+  (b2:Borde {BordeID: "dp8b2"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp9b2"}), 
-  (b2:Borde {BordeID: "cp10b1"})
+  (b1:Borde {BordeID: "dp7b2"}), 
+  (b2:Borde {BordeID: "dp8b2"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp10b2"}), 
-  (b2:Borde {BordeID: "cp11b1"})
+  (b1:Borde {BordeID: "dp8b3"}), 
+  (b2:Borde {BordeID: "dp10b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 
-  (b1:Borde {BordeID: "cp10b2"}), 
-  (b2:Borde {BordeID: "cp11b1"})
+  (b1:Borde {BordeID: "dp8b3"}), 
+  (b2:Borde {BordeID: "dp10b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp11b2"}), 
-  (b2:Borde {BordeID: "cp12b1"})
+  (b1:Borde {BordeID: "dp8b4"}), 
+  (b2:Borde {BordeID: "dp9b1"})
 MERGE (b1)-[:Conecta_en]->(b2);
 
 MATCH 
-  (b1:Borde {BordeID: "cp11b2"}), 
-  (b2:Borde {BordeID: "cp12b1"})
+  (b1:Borde {BordeID: "dp8b4"}), 
+  (b2:Borde {BordeID: "dp9b1"})
 MERGE (b2)-[:Conecta_en]->(b1);
 
 MATCH 

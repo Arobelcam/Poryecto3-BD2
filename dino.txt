@@ -1,0 +1,295 @@
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+
+//////////////////////////////////////////////// Creación de piezas
+
+//Pieza 1
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp1:Pieza {
+  PiezaID: "d1",
+  RompecabezasID: "dino1",
+  Tipo: "exterior",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+
+MERGE (r)-[:Compuesto_por]->(dp1);
+
+
+//Pieza 2
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp2:Pieza {
+  PiezaID: "d2",
+  RompecabezasID: "dino1",
+  Tipo: "exterior",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 4
+})
+
+MERGE (r)-[:Compuesto_por]->(dp2);
+
+// Pieza 3
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp3:Pieza {
+  PiezaID: "d3",
+  RompecabezasID: "dino1",
+  Tipo: "borde",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+MERGE (r)-[:Compuesto_por]->(dp3);
+
+// Pieza 4
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp4:Pieza {
+  PiezaID: "d4",
+  RompecabezasID: "dino1",
+  Tipo: "borde",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 3
+})
+MERGE (r)-[:Compuesto_por]->(dp4);
+
+
+// Pieza 5
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp5:Pieza {
+  PiezaID: "d5",
+  RompecabezasID: "dino1",
+  Tipo: "borde",
+  Estado: false,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 4
+})
+MERGE (r)-[:Compuesto_por]->(dp5);
+
+
+// Pieza 6
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp6:Pieza {
+  PiezaID: "d6",
+  RompecabezasID: "dino1",
+  Tipo: "borde",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+MERGE (r)-[:Compuesto_por]->(dp6);
+
+
+// Pieza 7
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp7:Pieza {
+  PiezaID: "d7",
+  RompecabezasID: "dino1",
+  Tipo: "borde",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 2
+})
+MERGE (r)-[:Compuesto_por]->(dp7);
+
+
+// Pieza 8
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp8:Pieza {
+  PiezaID: "d8",
+  RompecabezasID: "dino1",
+  Tipo: "interior",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 4
+})
+MERGE (r)-[:Compuesto_por]->(dp8);
+
+
+// Pieza 9
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp9:Pieza {
+  PiezaID: "d9",
+  RompecabezasID: "dino1",
+  Tipo: "exterior",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+MERGE (r)-[:Compuesto_por]->(dp9);
+
+
+// Pieza 10
+MERGE (r:Rompecabezas {RompecabezasID: "dino1"})
+MERGE (dp10:Pieza {
+  PiezaID: "d10",
+  RompecabezasID: "dino1",
+  Tipo: "exterior",
+  Estado: true,
+  BordeCompartido: false,
+  NumeroEntradas_Salidas: 1
+})
+MERGE (r)-[:Compuesto_por]->(dp10);
+
+
+
+
+
+//////////////////////////////////////////////// Creación de bordes
+
+//Pieza 1:
+
+MATCH (p1:Pieza {PiezaID: "d1"})
+UNWIND [
+  {BordeID: "dp1b1", EntradaOSalida: 0, Compartido: 0},
+] AS b1
+MERGE (bd1:Borde {
+  BordeID:        b1.BordeID,
+  PiezaID:        p1.PiezaID,
+  EntradaOSalida: b1.EntradaOSalida,
+  Compartido:     b1.Compartido
+})
+MERGE (p1)-[:Tiene]->(bd1);
+
+//Pieza 2:
+
+MATCH (p2:Pieza {PiezaID: "d2"})
+UNWIND [
+  {BordeID: "dp2b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp2b2", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp2b3", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "dp2b4", EntradaOSalida: 0, Compartido: 0}
+] AS b2
+MERGE (bd2:Borde {
+  BordeID:        b2.BordeID,
+  PiezaID:        p2.PiezaID,
+  EntradaOSalida: b2.EntradaOSalida,
+  Compartido:     b2.Compartido
+})
+MERGE (p2)-[:Tiene]->(bd2);
+
+//Pieza 3:
+MATCH (p3:Pieza {PiezaID: "d3"})
+UNWIND [
+  {BordeID: "dp3b1", EntradaOSalida: 0, Compartido: 0},
+
+] AS b3
+MERGE (bd3:Borde {
+  BordeID:        b3.BordeID,
+  PiezaID:        p3.PiezaID,
+  EntradaOSalida: b3.EntradaOSalida,
+  Compartido:     b3.Compartido
+})
+MERGE (p3)-[:Tiene]->(bd3);
+
+//Pieza 4:
+
+MATCH (p4:Pieza {PiezaID: "d4"})
+UNWIND [
+  {BordeID: "dp4b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp4b2", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp4b3", EntradaOSalida: 1, Compartido: 0}
+] AS b4
+MERGE (bd4:Borde {
+  BordeID:        b4.BordeID,
+  PiezaID:        p4.PiezaID,
+  EntradaOSalida: b4.EntradaOSalida,
+  Compartido:     b4.Compartido
+})
+MERGE (p4)-[:Tiene]->(bd4);
+
+//Pieza 5:
+
+MATCH (p5:Pieza {PiezaID: "d5"})
+UNWIND [
+  {BordeID: "dp5b1", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp5b2", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "dp5b3", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp5b3", EntradaOSalida: 1, Compartido: 0}
+] AS b5
+MERGE (bd5:Borde {
+  BordeID:        b5.BordeID,
+  PiezaID:        p5.PiezaID,
+  EntradaOSalida: b5.EntradaOSalida,
+  Compartido:     b5.Compartido
+})
+MERGE (p5)-[:Tiene]->(bd5);
+
+//Pieza 6:
+
+MATCH (p6:Pieza {PiezaID: "d6"})
+UNWIND [
+  {BordeID: "dp6b1", EntradaOSalida: 0, Compartido: 0}
+] AS b6
+MERGE (bd6:Borde {
+  BordeID:        b6.BordeID,
+  PiezaID:        p6.PiezaID,
+  EntradaOSalida: b6.EntradaOSalida,
+  Compartido:     b6.Compartido
+})
+MERGE (p6)-[:Tiene]->(bd6);
+
+
+//Pieza 7:
+
+MATCH (p7:Pieza {PiezaID: "d7"})
+UNWIND [
+  {BordeID: "dp7b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "dp7b2", EntradaOSalida: 1, Compartido: 0}
+] AS b5
+MERGE (bd7:Borde {
+  BordeID:        b7.BordeID,
+  PiezaID:        p7.PiezaID,
+  EntradaOSalida: b7.EntradaOSalida,
+  Compartido:     b7.Compartido
+})
+MERGE (p7)-[:Tiene]->(bd7);
+
+// Pieza 8
+
+MATCH (p8:Pieza {PiezaID: "d8"})
+UNWIND [
+  {BordeID: "dp8b1", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "dp8b2", EntradaOSalida: 0, Compartido: 0},
+  {BordeID: "dp8b3", EntradaOSalida: 1, Compartido: 0},
+  {BordeID: "dp8b4", EntradaOSalida: 1, Compartido: 0}
+
+] AS b8
+MERGE (bd8:Borde {
+  BordeID:        b8.BordeID,
+  PiezaID:        p8.PiezaID,
+  EntradaOSalida: b8.EntradaOSalida,
+  Compartido:     b8.Compartido
+})
+MERGE (p8)-[:Tiene]->(bd8)
+;
+
+
+// 
+MATCH (p9:Pieza {PiezaID: "d9"})
+UNWIND [
+  {BordeID: "dp9b1", EntradaOSalida: 0, Compartido: 0}
+] AS b9
+MERGE (bd9:Borde {
+  BordeID:        b9.BordeID,
+  PiezaID:        p9.PiezaID,
+  EntradaOSalida: b9.EntradaOSalida,
+  Compartido:     b.9Compartido
+})
+MERGE (p9)-[:Tiene]->(bd9)
+;
+
+
+
+//Pieza 10:
+MATCH (p10:Pieza {PiezaID: "d10"})
+UNWIND [
+  {BordeID: "dp10b1", EntradaOSalida: 0, Compartido: 0}
+] AS b10
+MERGE (bd10:Borde {
+  BordeID:        b10.BordeID,
+  PiezaID:        p10.PiezaID,
+  EntradaOSalida: b10.EntradaOSalida,
+  Compartido:     b10.Compartido
+})
+MERGE (p10)-[:Tiene]->(bd10)
